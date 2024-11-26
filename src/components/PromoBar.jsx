@@ -31,9 +31,9 @@ const PromoBar = () => {
   ];
 
   return (
-    <div className="bg-indigo-600 dark:bg-indigo-800 h-12 fixed w-full z-[60] top-0 overflow-hidden">
+    <div className="bg-indigo-600 dark:bg-indigo-800 h-10 overflow-hidden">
       <motion.div 
-        className="flex whitespace-nowrap py-2"
+        className="flex whitespace-nowrap h-full items-center"
         initial={{ x: "100%" }}
         animate={{ x: "-100%" }}
         transition={{ 

@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 export const useSearch = (items, options = {}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState(options.initialFilters || {});
-  const [sortConfig, setSortConfig] = useState(options.initialSort || { key: null, direction: 'asc' });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   const filteredItems = useMemo(() => {
     if (!items || items.length === 0) return [];
@@ -14,41 +14,32 @@ export const useSearch = (items, options = {}) => {
     if (searchTerm) {
       results = results.filter(item => {
         const searchRegex = new RegExp(searchTerm, 'i');
-        return (
-          searchRegex.test(item.title) || 
-          searchRegex.test(item.description) ||
-          (item.category && searchRegex.test(item.category.name))
+        return Object.values(item).some(value => 
+          typeof value === 'string' && searchRegex.test(value)
         );
-      });
+});
     }
 
-    // Filtre par catégorie
-    if (filters.category && filters.category !== 'all') {
-      const categoryId = parseInt(filters.category);
-      results = results.filter(item => item.category && item.category.id === categoryId);
-    }
-
-    // Filtre par prix
-    if (filters.priceRange) {
-      const { min, max } = filters.priceRange;
-      results = results.filter(item => {
-        const price = parseFloat(item.price);
-        return price >= min && price <= max;
-      });
-    }
+    // Application des filtres
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== 'all') {
+        results = results.filter(item => {
+          if (typeof value === 'object' && 'min' in value && 'max' in value) {
+            return item[key] >= value.min && item[key] <= value.max;
+          }
+          return item[key] === value;
+        });
+      }
+    });
 
     // Tri
-    if (sortConfig.key && sortConfig.key !== 'default') {
+    if (sortConfig.key) {
       results.sort((a, b) => {
-        if (sortConfig.key === 'price') {
-          const priceA = parseFloat(a.price);
-          const priceB = parseFloat(b.price);
-          return sortConfig.direction === 'asc' ? priceA - priceB : priceB - priceA;
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'asc' ? -1 : 1;
         }
-        if (sortConfig.key === 'title') {
-          return sortConfig.direction === 'asc' 
-            ? a.title.localeCompare(b.title)
-            : b.title.localeCompare(a.title);
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'asc' ? 1 : -1;
         }
         return 0;
       });

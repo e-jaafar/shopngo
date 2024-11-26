@@ -7,10 +7,11 @@ import PromoBar from './PromoBar';
 function Root() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
-      <PromoBar />
-      <div className="h-8" />
-      <Navbar />
-      <div className="h-16" />
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <PromoBar />
+        <Navbar />
+      </div>
+      <div className="h-[104px]" />
       <main className="flex-grow">
         <Outlet />
       </main>

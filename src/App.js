@@ -17,7 +17,6 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import { ToastProvider } from './context/ToastContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
-import Categories from './components/Categories';
 
 const router = createBrowserRouter([
   {
@@ -48,10 +47,6 @@ const router = createBrowserRouter([
       {
         path: 'orders',
         element: <OrderHistory />
-      },
-      {
-        path: 'categories',
-        element: <Categories />
       }
     ]
   },

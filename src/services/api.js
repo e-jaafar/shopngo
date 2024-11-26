@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.escuelajs.co/api/v1';
+const BASE_URL = 'https://fakestoreapi.com';
 
 // Configuration de l'intercepteur pour ajouter le token
 const api = axios.create({
@@ -20,8 +20,11 @@ api.interceptors.request.use((config) => {
 
 // Services pour les produits
 export const productService = {
-  getAll: async (offset = 0, limit = 20) => {
-    return api.get(`/products?offset=${offset}&limit=${limit}`);
+  getAll: async (limit = null, sort = 'asc') => {
+    const params = new URLSearchParams();
+    if (limit) params.append('limit', limit);
+    if (sort) params.append('sort', sort);
+    return api.get(`/products?${params.toString()}`);
   },
 
   getById: async (id) => {
@@ -29,21 +32,23 @@ export const productService = {
   },
 
   getCategories: async () => {
-    return api.get('/categories');
+    return api.get('/products/categories');
   },
 
-  getByCategory: async (categoryId, offset = 0, limit = 20) => {
-    return api.get(`/categories/${categoryId}/products?offset=${offset}&limit=${limit}`);
+  getByCategory: async (category, sort = 'asc') => {
+    return api.get(`/products/category/${category}?sort=${sort}`);
   },
 
-  filterProducts: async (params = {}) => {
-    const queryParams = new URLSearchParams();
-    if (params.title) queryParams.append('title', params.title);
-    if (params.price) queryParams.append('price', params.price);
-    if (params.price_min) queryParams.append('price_min', params.price_min);
-    if (params.price_max) queryParams.append('price_max', params.price_max);
-    if (params.categoryId) queryParams.append('categoryId', params.categoryId);
-    return api.get(`/products/?${queryParams.toString()}`);
+  create: async (product) => {
+    return api.post('/products', product);
+  },
+
+  update: async (id, product) => {
+    return api.put(`/products/${id}`, product);
+  },
+
+  delete: async (id) => {
+    return api.delete(`/products/${id}`);
   }
 };
 
