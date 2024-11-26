@@ -16,6 +16,8 @@ import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { ToastProvider } from './context/ToastContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
+import Categories from './components/Categories';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'orders',
         element: <OrderHistory />
+      },
+      {
+        path: 'categories',
+        element: <Categories />
       }
     ]
   },
@@ -54,15 +60,17 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider>
-      <CartProvider>
-        <FavoritesProvider>
-          <ToastProvider>
-            <div className='App dark:bg-gray-900'>
-              <RouterProvider router={router} />
-            </div>
-          </ToastProvider>
-        </FavoritesProvider>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <ToastProvider>
+              <div className='App dark:bg-gray-900'>
+                <RouterProvider router={router} />
+              </div>
+            </ToastProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

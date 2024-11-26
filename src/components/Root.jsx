@@ -8,8 +8,10 @@ function Root() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <PromoBar />
+      <div className="h-8" />
       <Navbar />
-      <main className="flex-grow pt-24">
+      <div className="h-16" />
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />

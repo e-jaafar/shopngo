@@ -13,13 +13,18 @@ const RelatedProducts = ({ currentProduct }) => {
     const fetchRelatedProducts = async () => {
       try {
         const response = await axios.get(
-          `https://fakestoreapi.com/products/category/${currentProduct.category}`
+          `https://api.escuelajs.co/api/v1/categories/${currentProduct.category.id}/products`
         );
-        setRelatedProducts(
-          response.data
-            .filter(product => product.id !== currentProduct.id)
-            .slice(0, 4)
-        );
+        
+        const adaptedProducts = response.data
+          .filter(product => product.id !== currentProduct.id)
+          .map(product => ({
+            ...product,
+            image: product.images[0]
+          }))
+          .slice(0, 4);
+
+        setRelatedProducts(adaptedProducts);
         setLoading(false);
       } catch (error) {
         console.error('Erreur lors du chargement des produits similaires:', error);
@@ -27,7 +32,7 @@ const RelatedProducts = ({ currentProduct }) => {
       }
     };
 
-    if (currentProduct?.category) {
+    if (currentProduct?.category?.id) {
       fetchRelatedProducts();
     }
   }, [currentProduct]);
@@ -63,7 +68,7 @@ const RelatedProducts = ({ currentProduct }) => {
                 </p>
                 <div className="mt-2">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200">
-                    {product.category}
+                    {product.category.name}
                   </span>
                 </div>
               </div>

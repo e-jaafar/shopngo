@@ -118,7 +118,7 @@ const Footer = () => {
               </a>
             </div>
             <p className="text-gray-400">
-              © 2024 FakeStore. Tous droits réservés.
+              © 2024 ShopnGo. Tous droits réservés.
             </p>
           </div>
         </div>

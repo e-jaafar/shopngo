@@ -17,8 +17,12 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
-        setProduct(response.data);
+        const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
+        const adaptedProduct = {
+          ...response.data,
+          image: response.data.images[0]
+        };
+        setProduct(adaptedProduct);
         setLoading(false);
       } catch (err) {
         setError("Une erreur est survenue lors du chargement du produit.");
