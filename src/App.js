@@ -14,6 +14,8 @@ import Favorites from './components/Favorites';
 import OrderHistory from './components/OrderHistory';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
+import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const router = createBrowserRouter([
   {
@@ -51,13 +53,17 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <CartProvider>
-      <FavoritesProvider>
-        <div className='App'>
-          <RouterProvider router={router} />
-        </div>
-      </FavoritesProvider>
-    </CartProvider>
+    <ThemeProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <ToastProvider>
+            <div className='App dark:bg-gray-900'>
+              <RouterProvider router={router} />
+            </div>
+          </ToastProvider>
+        </FavoritesProvider>
+      </CartProvider>
+    </ThemeProvider>
   );
 }
 

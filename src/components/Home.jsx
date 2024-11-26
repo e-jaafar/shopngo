@@ -53,8 +53,8 @@ function Home() {
 
   return (
     <div className="relative">
-      {/* Hero Section avec un design plus moderne */}
-      <section className="relative h-screen flex items-center bg-gradient-to-r from-gray-900 to-gray-800 overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center bg-gradient-to-r from-gray-900 to-gray-800 dark:from-black dark:to-gray-900 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <img
@@ -71,17 +71,17 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-white dark:text-gray-100 mb-6">
               Découvrez l'Excellence
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-200 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
               Une sélection unique de produits premium pour des clients exigeants.
               Qualité exceptionnelle, design élégant, service irréprochable.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center px-8 py-4 border-2 border-white text-white text-lg font-medium rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 border-2 border-white text-white dark:border-gray-300 dark:text-gray-300 text-lg font-medium rounded-full hover:bg-white hover:text-gray-900 dark:hover:bg-gray-300 dark:hover:text-gray-900 transition-all duration-300"
               >
                 Explorer la Collection
                 <ArrowRightIcon className="ml-2 h-5 w-5" />
@@ -91,14 +91,14 @@ function Home() {
         </div>
       </section>
 
-      {/* Section Catégories Tendance */}
-      <section className="py-24 bg-white">
+      {/* Section Catégories */}
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Collections Exclusives
             </h2>
-            <div className="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            <div className="w-24 h-1 bg-indigo-600 dark:bg-indigo-500 mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -118,7 +118,7 @@ function Home() {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 flex items-center justify-center z-20">
-                    <h3 className="text-2xl font-bold text-white">{category.displayName}</h3>
+                    <h3 className="text-2xl font-bold text-white dark:text-gray-100">{category.displayName}</h3>
                   </div>
                 </Link>
               </motion.div>
@@ -128,7 +128,7 @@ function Home() {
       </section>
 
       {/* Section Avantages */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {[
@@ -144,9 +144,9 @@ function Home() {
                 transition={{ delay: index * 0.2 }}
                 className="text-center"
               >
-                <feature.icon className="h-12 w-12 text-indigo-600 mx-auto mb-6" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.desc}</p>
+                <feature.icon className="h-12 w-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-6" />
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -154,13 +154,13 @@ function Home() {
       </section>
 
       {/* Section Témoignages */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Ce que nos clients disent
             </h2>
-            <div className="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            <div className="w-24 h-1 bg-indigo-600 dark:bg-indigo-500 mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -170,7 +170,7 @@ function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="flex items-center mb-6">
                   <img
@@ -179,64 +179,19 @@ function Home() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">{testimonial.author}</h3>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.author}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">"{testimonial.content}"</p>
+                <p className="text-gray-600 dark:text-gray-300 italic">"{testimonial.content}"</p>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section Statistiques */}
-      <section className="py-20 bg-indigo-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: "10K+", label: "Clients satisfaits" },
-              { number: "24/7", label: "Support client" },
-              { number: "98%", label: "Avis positifs" },
-              { number: "3.5K+", label: "Produits disponibles" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-indigo-200">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section Partenaires */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900">Ils nous font confiance</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-            {[1, 2, 3, 4].map((partner) => (
-              <div key={partner} className="flex justify-center">
-                <img
-                  src={`https://via.placeholder.com/200x80?text=Partner+${partner}`}
-                  alt={`Partner ${partner}`}
-                  className="h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Section Newsletter */}
-      <section className="py-24 bg-indigo-600">
+      <section className="py-20 bg-indigo-700 dark:bg-indigo-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
@@ -249,17 +204,15 @@ function Home() {
               <input
                 type="email"
                 placeholder="Votre adresse email"
-                className="px-6 py-4 rounded-full text-gray-900 w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-white"
+                className="px-6 py-4 rounded-full text-gray-900 dark:text-white w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800 dark:border-gray-700"
               />
-              <button className="px-8 py-4 bg-white text-indigo-600 rounded-full font-medium hover:bg-gray-100 transition-colors duration-300">
+              <button className="px-8 py-4 bg-white dark:bg-gray-200 text-indigo-600 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-gray-300 transition-colors duration-300">
                 S'inscrire
               </button>
             </form>
           </div>
         </div>
       </section>
-
-      {/* Footer amélioré dans le composant Root.jsx */}
     </div>
   );
 }

@@ -1,16 +1,36 @@
-
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
+/* Ajout des transitions pour le changement de thème */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
 
+/* Styles de base */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+}
+
+/* Styles pour les cartes et conteneurs */
+.card {
+  @apply bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+
+/* Styles pour les boutons */
+.btn-primary {
+  @apply bg-indigo-600 dark:bg-indigo-500 text-white hover:bg-indigo-700 dark:hover:bg-indigo-600;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600;
+}
+
+/* Styles pour les inputs */
+.input {
+  @apply bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-indigo-500 dark:focus:ring-indigo-400;
 }
 
 code {

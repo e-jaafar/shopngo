@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { useTheme } from '../context/ThemeContext';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,7 @@ const Products = () => {
   const [maxPrice, setMaxPrice] = useState(1000);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,7 +142,7 @@ const Products = () => {
             <input
               type="text"
               placeholder="Rechercher un produit..."
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-4 py-2 rounded-lg border dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -237,7 +239,7 @@ const Products = () => {
         {currentProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+            className="group relative bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             {/* Bouton favoris */}
             <button
@@ -261,13 +263,13 @@ const Products = () => {
                 />
               </div>
               <div className="px-4 py-4">
-                <h3 className="text-sm font-medium text-gray-900 truncate" title={product.title}>
+                <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate" title={product.title}>
                   {product.title}
                 </h3>
-                <p className="mt-1 text-sm text-gray-500 line-clamp-2" title={product.description}>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2" title={product.description}>
                   {product.description}
                 </p>
-                <p className="mt-1 text-lg font-medium text-indigo-600">
+                <p className="mt-1 text-lg font-medium text-indigo-600 dark:text-indigo-400">
                   {product.price.toFixed(2)} €
                 </p>
               </div>
