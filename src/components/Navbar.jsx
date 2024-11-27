@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { HeartIcon, ShoppingBagIcon, UserIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, ShoppingBagIcon, UserIcon, MagnifyingGlassIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { useFavorites } from '../context/FavoritesContext';
 import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
@@ -18,6 +18,7 @@ const Navbar = () => {
   const { state: favoritesState } = useFavorites();
   const { isAuthenticated, user, logout } = useAuth();
   const { showToast } = useToast();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const cartItemsCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
   const favoritesCount = favoritesState.items.length;
@@ -73,7 +74,16 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo et liens principaux */}
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-4">
+            <button
+              className="lg:hidden text-gray-600 dark:text-gray-400 hover:text-indigo-600"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Bars3Icon className={`h-6 w-6 transition-transform duration-300 ${
+                isMobileMenuOpen ? 'rotate-90' : ''
+              }`} />
+            </button>
+
             <Link to="/" className="flex items-center space-x-2">
               <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
                 ShopnGo
@@ -132,34 +142,25 @@ const Navbar = () => {
           </div>
 
           {/* Actions (droite) */}
-          <div className="flex items-center space-x-6">
-            {/* Livraison gratuite - Nouveau */}
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            {/* Livraison gratuite - Masqué sur mobile */}
             <span className="hidden lg:block text-sm text-gray-600 dark:text-gray-400">
               Livraison gratuite dès 50€
             </span>
 
-            {/* Liens d'aide et magasins - Nouveau */}
+            {/* Liens d'aide et magasins - Déplacés dans le menu mobile */}
             <div className="hidden md:flex items-center space-x-4">
-              <Link 
-                to="/contact" 
-                className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-              >
+              <Link to="/contact" className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600">
                 Aide
               </Link>
-              <Link 
-                to="/stores" 
-                className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-              >
+              <Link to="/stores" className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600">
                 Nos magasins
               </Link>
             </div>
 
             {/* Recherche */}
             <div className="relative">
-              <button
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-              >
+              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
                 <MagnifyingGlassIcon className="h-6 w-6" />
               </button>
               <AnimatePresence>
@@ -205,14 +206,13 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* Theme Toggle - Déplacé dans le menu mobile sur petits écrans */}
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
 
             {/* Favoris */}
-            <Link
-              to="/favorites"
-              className="relative text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-            >
+            <Link to="/favorites" className="relative">
               <HeartIcon className="h-6 w-6" />
               {favoritesCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -222,10 +222,7 @@ const Navbar = () => {
             </Link>
 
             {/* Panier */}
-            <Link
-              to="/cart"
-              className="relative text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-            >
+            <Link to="/cart" className="relative">
               <ShoppingBagIcon className="h-6 w-6" />
               {cartItemsCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -234,10 +231,10 @@ const Navbar = () => {
               )}
             </Link>
 
-            {/* Compte */}
+            {/* Compte - Modifié pour mobile */}
             {isAuthenticated ? (
               <div className="relative group">
-                <button className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                <button className="flex items-center space-x-2">
                   <UserIcon className="h-6 w-6" />
                   <span className="hidden sm:block">{user.username}</span>
                 </button>
@@ -266,21 +263,88 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="bg-indigo-600 dark:bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
-              >
-                Connexion
-              </button>
+              <>
+                <button
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="hidden sm:block bg-indigo-600 dark:bg-indigo-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Connexion
+                </button>
+                <button
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="sm:hidden"
+                >
+                  <UserIcon className="h-6 w-6" />
+                </button>
+              </>
             )}
           </div>
         </div>
       </div>
 
-      <LoginModal 
-        isOpen={isLoginModalOpen} 
-        onClose={() => setIsLoginModalOpen(false)} 
-      />
+      {/* Menu mobile avec overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Menu */}
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800 relative z-50"
+            >
+              <div className="px-4 py-3 space-y-4">
+                {/* Navigation mobile */}
+                {Object.keys(megaMenuCategories).map((category) => (
+                  <div key={category} className="py-2">
+                    <button 
+                      className="text-gray-700 dark:text-gray-300 font-medium"
+                      onClick={() => {
+                        // Ajouter ici la logique de navigation si nécessaire
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      {category}
+                    </button>
+                  </div>
+                ))}
+                
+                {/* Éléments déplacés */}
+                <div className="border-t dark:border-gray-800 pt-3">
+                  <Link 
+                    to="/contact" 
+                    className="block py-2 text-gray-600 dark:text-gray-400"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Aide
+                  </Link>
+                  <Link 
+                    to="/stores" 
+                    className="block py-2 text-gray-600 dark:text-gray-400"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Nos magasins
+                  </Link>
+                  <div className="py-2">
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </div>
   );
 };
