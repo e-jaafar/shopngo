@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { HeartIcon, ShoppingBagIcon, UserIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useFavorites } from '../context/FavoritesContext';
@@ -18,7 +18,6 @@ const Navbar = () => {
   const { state: favoritesState } = useFavorites();
   const { isAuthenticated, user, logout } = useAuth();
   const { showToast } = useToast();
-  const navigate = useNavigate();
 
   const cartItemsCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
   const favoritesCount = favoritesState.items.length;

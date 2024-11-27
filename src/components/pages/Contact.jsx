@@ -5,7 +5,6 @@ import {
   PhoneIcon, 
   EnvelopeIcon, 
   MapPinIcon,
-  ChatBubbleLeftRightIcon,
   ClockIcon 
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../context/ToastContext';

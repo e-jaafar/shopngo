@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useRouteError } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HomeIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -65,6 +65,7 @@ const ErrorPage = () => {
             onClick={() => navigate(-1)}
             className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           >
+            <ArrowLeftIcon className="h-5 w-5 mr-2" />
             Retour
           </button>
 

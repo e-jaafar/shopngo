@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PageTransition from '../PageTransition';
 import { motion } from 'framer-motion';
 import { 
@@ -9,7 +9,6 @@ import {
 } from '@heroicons/react/24/outline';
 
 const Stores = () => {
-  const [selectedStore, setSelectedStore] = useState(null);
 
   const stores = [
     {
@@ -86,22 +85,6 @@ const Stores = () => {
         </motion.div>
 
         {/* Carte interactive - Version modifiée sans API key */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="w-full h-[400px] mb-16 rounded-lg overflow-hidden shadow-lg"
-        >
-          <iframe
-            title="Carte des magasins"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            scrolling="no"
-            marginHeight="0"
-            marginWidth="0"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-4.9853515625%2C42.89206418807337%2C8.767089843750002%2C51.17934297928927&amp;layer=mapnik"
-          />
-        </motion.div>
 
         {/* Liste des magasins */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -188,6 +171,23 @@ const Stores = () => {
             </motion.div>
           ))}
         </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="w-full h-[400px] mb-16 rounded-lg overflow-hidden shadow-lg"
+        >
+          <iframe 
+            title="Carte des magasins ShopnGo"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10497.881783644729!2d2.298476671945068!3d48.86830764133292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc518637631%3A0x7c6b92d2c2465999!2zQ2hhbXBzLcOJbHlzw6llcywgUGFyaXMsIEZyYW5jZQ!5e0!3m2!1sfr!2sbe!4v1732716605056!5m2!1sfr!2sbe" 
+            width="600" 
+            height="450" 
+            style={{ border: 0, width: '100%', height: '100%' }}
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+          />
+        </motion.div>
+
       </div>
     </PageTransition>
   );
