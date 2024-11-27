@@ -70,81 +70,92 @@ const Navbar = () => {
 
   return (
     <div className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 shadow-lg' : 'bg-white dark:bg-gray-900'}`}>
-      {/* Barre supérieure */}
-      <div className="bg-indigo-600 dark:bg-indigo-800 text-white py-2 text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <p>Livraison gratuite dès 50€ d'achat</p>
-          <div className="flex items-center space-x-4">
-            <Link to="/contact" className="hover:text-indigo-200">Aide</Link>
-            <Link to="/stores" className="hover:text-indigo-200">Nos magasins</Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </div>
-
       {/* Navbar principale */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
-              ShopnGo
-            </span>
-          </Link>
+          {/* Logo et liens principaux */}
+          <div className="flex items-center space-x-8">
+            <Link to="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
+                ShopnGo
+              </span>
+            </Link>
 
-          {/* Navigation principale */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {Object.keys(megaMenuCategories).map((category) => (
-              <div key={category} className="relative group">
-                <button className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium py-2">
-                  {category}
-                </button>
-                {/* Mega Menu */}
-                <div className="absolute left-0 w-screen max-w-7xl -ml-72 mt-0 hidden group-hover:block">
-                  <div className="relative mt-6">
-                    <div className="absolute -top-2 left-72 w-4 h-4 rotate-45 bg-white dark:bg-gray-800"></div>
-                    <div className="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg p-6 grid grid-cols-4 gap-6">
-                      {/* Featured */}
-                      <div className="col-span-1 space-y-4">
-                        <h3 className="text-indigo-600 dark:text-indigo-400 font-semibold">À la une</h3>
-                        {megaMenuCategories[category].featured.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.href}
-                            className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-                          >
-                            {item.name}
-                          </Link>
+            {/* Navigation principale */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              {Object.keys(megaMenuCategories).map((category) => (
+                <div key={category} className="relative group">
+                  <button className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium py-2">
+                    {category}
+                  </button>
+                  {/* Mega Menu */}
+                  <div className="absolute left-0 w-screen max-w-7xl -ml-72 mt-0 hidden group-hover:block">
+                    <div className="relative mt-6">
+                      <div className="absolute -top-2 left-72 w-4 h-4 rotate-45 bg-white dark:bg-gray-800"></div>
+                      <div className="relative bg-white dark:bg-gray-800 shadow-xl rounded-lg p-6 grid grid-cols-4 gap-6">
+                        {/* Featured */}
+                        <div className="col-span-1 space-y-4">
+                          <h3 className="text-indigo-600 dark:text-indigo-400 font-semibold">À la une</h3>
+                          {megaMenuCategories[category].featured.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
+                              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
+                        {/* Categories */}
+                        {megaMenuCategories[category].categories.map((cat) => (
+                          <div key={cat.name} className="col-span-1">
+                            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">{cat.name}</h3>
+                            <ul className="space-y-2">
+                              {cat.items.map((item) => (
+                                <li key={item}>
+                                  <Link
+                                    to={`/products?category=${cat.name.toLowerCase()}&subcategory=${item.toLowerCase()}`}
+                                    className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+                                  >
+                                    {item}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))}
                       </div>
-                      {/* Categories */}
-                      {megaMenuCategories[category].categories.map((cat) => (
-                        <div key={cat.name} className="col-span-1">
-                          <h3 className="font-semibold text-gray-900 dark:text-white mb-4">{cat.name}</h3>
-                          <ul className="space-y-2">
-                            {cat.items.map((item) => (
-                              <li key={item}>
-                                <Link
-                                  to={`/products?category=${cat.name.toLowerCase()}&subcategory=${item.toLowerCase()}`}
-                                  className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
-                                >
-                                  {item}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </nav>
+              ))}
+            </nav>
+          </div>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Recherche - Version corrigée pour mobile */}
+          {/* Actions (droite) */}
+          <div className="flex items-center space-x-6">
+            {/* Livraison gratuite - Nouveau */}
+            <span className="hidden lg:block text-sm text-gray-600 dark:text-gray-400">
+              Livraison gratuite dès 50€
+            </span>
+
+            {/* Liens d'aide et magasins - Nouveau */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Link 
+                to="/contact" 
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                Aide
+              </Link>
+              <Link 
+                to="/stores" 
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+              >
+                Nos magasins
+              </Link>
+            </div>
+
+            {/* Recherche */}
             <div className="relative">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -194,6 +205,9 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Favoris */}
             <Link
