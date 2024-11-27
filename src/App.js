@@ -17,7 +17,17 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import { ToastProvider } from './context/ToastContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
-
+import Account from './components/Account';
+import About from './components/pages/About';
+import Careers from './components/pages/Careers';
+import Press from './components/pages/Press';
+import Shipping from './components/pages/Shipping';
+import Privacy from './components/pages/Privacy';
+import Terms from './components/pages/Terms';
+import Cookies from './components/pages/Cookies';
+import FAQ from './components/pages/FAQ';
+import Contact from './components/pages/Contact';
+import Stores from './components/pages/Stores';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -47,6 +57,48 @@ const router = createBrowserRouter([
       {
         path: 'orders',
         element: <OrderHistory />
+      },
+      {
+        path: 'account',
+        element: <Account />
+      },
+      {
+        path: 'about',
+        element: <About />
+      },
+      {
+        path: 'careers',
+        element: <Careers />
+      },{
+        path: 'press',
+        element: <Press />
+      },
+      {
+        path: 'shipping',
+        element: <Shipping />
+      },
+      {
+        path: 'privacy',
+        element: <Privacy />
+      },
+      {
+        path: 'terms',
+        element: <Terms />
+      },{
+        path: 'cookies',
+        element: <Cookies />
+      },
+      {
+        path: 'faq',
+        element: <FAQ />
+      },
+      {
+        path: 'contact',
+        element: <Contact />
+      },
+      {
+        path: 'stores',
+        element: <Stores />
       }
     ]
   },

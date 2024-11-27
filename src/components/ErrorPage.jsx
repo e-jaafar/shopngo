@@ -59,11 +59,11 @@ const ErrorPage = () => {
 
         <motion.div
           variants={itemVariants}
-          className="space-y-4"
+          className="flex justify-center space-x-4"
         >
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 mr-4 transition-colors duration-200"
+            className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           >
             Retour
           </button>

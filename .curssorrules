@@ -29,3 +29,39 @@ Follow these rules when you write code:
 - Use descriptive variable and function/const names. Also, event functions should be named with a “handle” prefix, like “handleClick” for onClick and “handleKeyDown” for onKeyDown.
 - Implement accessibility features on elements. For example, a tag should have a tabindex=“0”, aria-label, on:click, and on:keydown, and similar attributes.
 - Use consts instead of functions, for example, “const toggle = () =>”. Also, define a type if possible.
+
+architecture:
+src/
+├── components/
+│   ├── common/           # Composants réutilisables
+│   │   ├── ThemeToggle/
+│   │   │   └── index.jsx
+│   │   └── Toast/
+│   │       └── index.jsx
+│   ├── layout/          # Composants de mise en page
+│   │   ├── Footer/
+│   │   │   └── index.jsx
+│   │   ├── Navbar/
+│   │   │   └── index.jsx
+│   │   ├── PromoBar/
+│   │   │   └── index.jsx
+│   │   └── Root/
+│   │       └── index.jsx
+│   ├── features/        # Composants spécifiques aux fonctionnalités
+│   │   ├── auth/
+│   │   │   └── LoginModal/
+│   │   │       └── index.jsx
+│   │   ├── cart/
+│   │   │   └── index.jsx
+│   │   ├── products/
+│   │   │   ├── ProductCard/
+│   │   │   ├── ProductDetail/
+│   │   │   ├── ProductList/
+│   │   │   └── SearchFilters/
+│   │   └── account/
+│   │       └── index.jsx
+│   └── pages/          # Pages principales
+│       ├── Home/
+│       ├── About/
+│       ├── Products/
+│       └── etc...
